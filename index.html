@@ -1,218 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Odd Shoes — Odd Agent</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Odd Shoes — Founder Support Agent</title>
+  <style>
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      margin: 0;
+      background: #0b0f1a;
+      color: #fff;
+    }
 
-<style>
-body { font-family: system-ui, Arial, sans-serif; margin:0; background:#0b0f1a; color:#fff; }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 22px;
+    }
 
-.wrap { max-width:860px; margin:0 auto; padding:22px; }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      overflow: hidden;
+    }
 
-.card {
-  background: rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:18px;
-  overflow:hidden;
-}
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.05);
+      gap: 14px;
+    }
 
-.head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 18px;
-  background: rgba(255,255,255,0.05);
-}
+    .brand {
+      font-weight: 850;
+      letter-spacing: .2px;
+    }
 
-.brand { font-weight:850; letter-spacing:.2px; }
+    .sub {
+      opacity: .85;
+      font-size: 13px;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
 
-.sub { opacity:.85; font-size:13px; margin-top:4px; }
+    .cta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-.cta a{
-  display:inline-block;
-  padding:10px 12px;
-  border-radius:12px;
-  background:#fff;
-  color:#000;
-  text-decoration:none;
-  font-weight:800;
-}
+    .cta a {
+      display: inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      white-space: nowrap;
+    }
 
-#chat{
-  height:440px;
-  overflow-y:auto;
-  padding:18px;
-}
+    #chat {
+      height: 460px;
+      overflow-y: auto;
+      padding: 18px;
+    }
 
-.row{ display:flex; margin:10px 0; }
+    .row {
+      display: flex;
+      margin: 10px 0;
+    }
 
-.row.user{ justify-content:flex-end; }
+    .row.user {
+      justify-content: flex-end;
+    }
 
-.bubble{
-  max-width:76%;
-  padding:12px 14px;
-  border-radius:14px;
-  line-height:1.35;
-  white-space:pre-wrap;
-}
+    .bubble {
+      max-width: 78%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
 
-.user .bubble{
-  background:#fff;
-  color:#000;
-  border-bottom-right-radius:4px;
-}
+    .user .bubble {
+      background: #fff;
+      color: #000;
+      border-bottom-right-radius: 4px;
+    }
 
-.agent .bubble{
-  background: rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.14);
-  border-bottom-left-radius:4px;
-}
+    .agent .bubble {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-bottom-left-radius: 4px;
+    }
 
-.foot{
-  display:flex;
-  gap:10px;
-  padding:14px;
-  border-top:1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.03);
-}
+    .foot {
+      display: flex;
+      gap: 10px;
+      padding: 14px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+    }
 
-input{
-  flex:1;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.18);
-  background: rgba(0,0,0,0.22);
-  color:#fff;
-  outline:none;
-}
+    input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.22);
+      color: #fff;
+      outline: none;
+    }
 
-button{
-  padding:12px 14px;
-  border-radius:12px;
-  border:0;
-  background:#7c3aed;
-  color:#fff;
-  font-weight:800;
-  cursor:pointer;
-}
+    button {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 0;
+      background: #7c3aed;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
 
-.tiny{
-  font-size:12px;
-  opacity:.8;
-  padding:0 18px 16px;
-}
-</style>
+    .tiny {
+      font-size: 12px;
+      opacity: .8;
+      padding: 0 18px 16px;
+      line-height: 1.4;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <div>
+          <div class="brand">🚀 Odd Shoes — Founder Support Agent</div>
+          <div class="sub">
+            Ask about MVPs, branding, growth strategy, AI automation, or how to get started with Odd Shoes.
+          </div>
+        </div>
 
-<div class="wrap">
+        <div class="cta">
+          <a href="https://www.oddshoes.dev/" target="_blank" rel="noreferrer">Visit Site</a>
+          <a href="https://www.oddshoes.dev/" target="_blank" rel="noreferrer">Launch Planner</a>
+        </div>
+      </div>
 
-<div class="card">
+      <div id="chat"></div>
 
-<div class="head">
-<div>
-<div class="brand">👟 Odd Shoes — Odd Agent</div>
-<div class="sub">
-Ask about styles, comfort & sizing. Want discounts? Drop your email.
-</div>
-</div>
+      <div class="foot">
+        <input id="input" placeholder="Try: 'I want to launch an MVP in 2 weeks'" />
+        <button id="send">Send</button>
+      </div>
 
-<div class="cta">
-<a href="https://oddshoes.dev" target="_blank">Shop Now</a>
-</div>
-</div>
+      <div class="tiny">
+        Tip: Ask about MVP development, branding, growth strategy, AI agents, or booking a call.
+      </div>
+    </div>
+  </div>
 
-<div id="chat"></div>
+  <script>
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("input");
+    const sendBtn = document.getElementById("send");
 
-<div class="foot">
-<input id="input" placeholder="Try: 'I need a bold pair for a party'" />
-<button id="send">Send</button>
-</div>
+    const history = [];
 
-<div class="tiny">
-Tip: Say “discount” → the agent should ask for your email.
-</div>
+    function add(role, text) {
+      const row = document.createElement("div");
+      row.className = "row " + (role === "user" ? "user" : "agent");
 
-</div>
-</div>
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = text;
 
-<script>
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+    }
 
-const chat = document.getElementById("chat");
-const input = document.getElementById("input");
-const sendBtn = document.getElementById("send");
+    add(
+      "agent",
+      "Hi — I’m the Odd Shoes support agent 🚀\nI can help with MVPs, branding, growth strategy, AI automation, and next steps for founders.\nWhat are you building?"
+    );
 
-const history = [];
+    async function send() {
+      const msg = input.value.trim();
+      if (!msg) return;
 
-function add(role,text){
+      add("user", msg);
+      history.push({ role: "user", content: msg });
+      input.value = "";
 
-  const row = document.createElement("div");
-  row.className = "row " + (role === "user" ? "user" : "agent");
+      add("agent", "…thinking");
 
-  const bubble = document.createElement("div");
-  bubble.className = "bubble";
-  bubble.textContent = text;
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg, history })
+        });
 
-  row.appendChild(bubble);
-  chat.appendChild(row);
+        const data = await res.json();
+        chat.lastChild.remove();
 
-  chat.scrollTop = chat.scrollHeight;
-}
+        const reply = data.reply || data.error || "Oops—something broke. Try again.";
+        add("agent", reply);
+        history.push({ role: "assistant", content: reply });
+      } catch (err) {
+        chat.lastChild.remove();
+        add("agent", "Network error: backend not responding.");
+      }
+    }
 
-add("agent","Yo! I’m Odd Agent 👟😈\nTell me your vibe: casual, sporty, or bold-statement?");
-
-async function send(){
-
-const msg = input.value.trim();
-
-if(!msg) return;
-
-add("user",msg);
-
-history.push({role:"user",content:msg});
-
-input.value="";
-
-add("agent","…thinking");
-
-try{
-
-const res = await fetch("/api/chat",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({message:msg,history})
-});
-
-const data = await res.json();
-
-chat.lastChild.remove();
-
-/* FIXED LINE HERE */
-const reply = data.reply || data.error || "Server error occurred.";
-
-add("agent",reply);
-
-history.push({role:"assistant",content:reply});
-
-}catch(err){
-
-chat.lastChild.remove();
-
-add("agent","Network error: backend not responding.");
-
-}
-
-}
-
-sendBtn.addEventListener("click",send);
-
-input.addEventListener("keydown",e=>{
-if(e.key==="Enter") send();
-});
-
-</script>
-
+    sendBtn.addEventListener("click", send);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") send();
+    });
+  </script>
 </body>
 </html>
