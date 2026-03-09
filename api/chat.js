@@ -12,7 +12,11 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
     }
 
-    const { message } = req.body;
+    const { message } = req.body || {};
+
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ error: "Missing message" });
+    }
 
     const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -24,14 +28,17 @@ export default async function handler(req, res) {
 You are the marketing assistant for Odd Shoes.
 
 Tone:
-Bold, fun, confident.
+- Bold
+- Fun
+- Confident
 
 Responsibilities:
-• Help users choose shoes
-• Suggest styles (casual / sporty / bold)
-• Answer comfort and sizing questions
-• If the user asks about discounts, ask for their email
-• Always end with a call-to-action
+- Help users choose shoes
+- Suggest styles (casual / sporty / bold)
+- Answer comfort and sizing questions
+- If the user asks about discounts, ask for their email
+- Politely redirect unrelated questions back to Odd Shoes
+- Always end with a call-to-action
 
 User: ${message}
 
@@ -44,9 +51,9 @@ Agent:
     return res.status(200).json({ reply });
 
   } catch (error) {
-    console.error(error);
+    console.error("Gemini API error:", error);
     return res.status(500).json({
-      error: error.message
+      error: String(error?.message || error)
     });
   }
 }
