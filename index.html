@@ -207,23 +207,12 @@
           body: JSON.stringify({ message: msg, history })
         });
 
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
+
         chat.lastChild.remove();
-        const res = await fetch("/api/chat", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ message: msg })
-});
 
-const data = await res.json().catch(() => ({}));
+        const reply = data.reply || data.error || "Server error occurred.";
 
-chat.lastChild.remove();
-
-const reply = data.reply || data.error || "Server error occurred.";
-
-add("agent", reply);
-
-        const reply = data.reply || data.error || "Oops—something broke. Try again.";
         add("agent", reply);
         history.push({ role: "assistant", content: reply });
       } catch (err) {
@@ -233,6 +222,7 @@ add("agent", reply);
     }
 
     sendBtn.addEventListener("click", send);
+
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") send();
     });
