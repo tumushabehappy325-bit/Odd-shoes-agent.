@@ -21,7 +21,8 @@ export default async function handler(req, res) {
     const genAI = new GoogleGenerativeAI(apiKey);
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash"
+      model: "gemini-flash-latest"
+      // or: model: "gemini-3-flash-preview"
     });
 
     const prompt = `
@@ -49,9 +50,8 @@ Agent:
     const reply = result.response.text();
 
     return res.status(200).json({ reply });
-
   } catch (error) {
-    console.error("Gemini API error:", error);
+    console.error("CHAT ERROR:", error);
     return res.status(500).json({
       error: String(error?.message || error)
     });
