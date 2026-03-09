@@ -209,6 +209,19 @@
 
         const data = await res.json();
         chat.lastChild.remove();
+        const res = await fetch("/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: msg })
+});
+
+const data = await res.json().catch(() => ({}));
+
+chat.lastChild.remove();
+
+const reply = data.reply || data.error || "Server error occurred.";
+
+add("agent", reply);
 
         const reply = data.reply || data.error || "Oops—something broke. Try again.";
         add("agent", reply);
