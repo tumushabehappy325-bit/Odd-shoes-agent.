@@ -4,10 +4,10 @@ const SITE_KNOWLEDGE = `
 Odd Shoes is a tech partner for Christian founders.
 
 Key facts:
-- Builds MVPs, brands, and growth systems.
-- Ships MVPs in 5–14 days.
-- 100+ MVPs shipped.
-- 15+ products live.
+- Builds MVPs, brands, and growth systems
+- Ships MVPs in 5–14 days
+- 100+ MVPs shipped
+- 15+ products live
 
 Core services:
 • Genesis Build – 5-day MVP sprint
@@ -29,6 +29,7 @@ Contact: buildit@oddshoes.dev
 
 export default async function handler(req, res) {
   try {
+
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method not allowed" });
     }
@@ -39,7 +40,8 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
     }
 
-    const { message } = req.body || {};
+    const body = req.body || {};
+    const message = body.message || "";
 
     if (!message) {
       return res.status(400).json({ error: "Message missing" });
@@ -59,11 +61,10 @@ Use the knowledge below as your main source.
 ${SITE_KNOWLEDGE}
 
 Rules:
-- Answer based on the Odd Shoes services.
-- Help founders launch MVPs or AI systems.
-- If a question is unrelated, redirect to how Odd Shoes helps founders.
-- Do not invent information.
-- End with a suggestion like booking a call or launching the project planner.
+- Help founders build MVPs, startups, or AI systems
+- Do not invent information
+- Redirect unrelated questions back to Odd Shoes services
+- Suggest booking a call or launching the project planner
 
 User question:
 ${message}
@@ -73,7 +74,7 @@ Assistant:
 
     const result = await model.generateContent(prompt);
 
-    const reply = result.response.text();
+    const reply = result.response?.text?.() || "I'm sorry, I couldn't generate a response.";
 
     return res.status(200).json({ reply });
 
@@ -82,7 +83,7 @@ Assistant:
     console.error("CHAT ERROR:", error);
 
     return res.status(500).json({
-      error: error.message || "Server error"
+      error: error?.message || "Server error"
     });
 
   }
